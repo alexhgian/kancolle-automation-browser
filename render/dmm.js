@@ -15,7 +15,7 @@ onload = function() {
 
     webview.addEventListener('dom-ready', function(e) {
         var url = webview.getUrl();
-        console.log('dom-ready: ' + url);
+        // console.log('dom-ready: ' + url);
 
         // Check to see if the user has sucessfully logged in as they will be redirected to the front page.
         if(isLoggedIn && url ==='http://www.dmm.com/') {
@@ -57,7 +57,7 @@ onload = function() {
         // console.log('response...')
         if(apiRE.test(e.newUrl) && !apiTokenFound){
             console.log('------------------- WIN --------------------');
-            console.log(e.newUrl);
+            // console.log(e.newUrl);
             console.log('------------------------------------------');
             apiTokenFound=true;
             // TODO: call main process

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Robot Test</h2>
+
+        <div class="col-sm-1">
+            <button id="helloBtn" class="btn btn-success">Farm</button>
+        </div>
+
+        <div id="myLabel" class="label label-default">Hi</div>
+
+    </div>
+
+    <script>
+    window.onload = function(){
+
+        var bot = require('../process/bot')(mainWindow);
+        bot.run('farmNode');
+
+        var lab = document.getElementById('myLabel');
+
+        document.getElementById('helloBtn')
+        .addEventListener('click', function(){
+            console.log('hello')
+            lab.setAttribute('class', 'label label-success')
+        });
+
+        document.getElementById('dangerBtn')
+        .addEventListener('click', function(){
+            console.log('danger')
+            lab.setAttribute('class', 'label label-danger')
+        });
+
+    }
+    </script>
+
+</body>
+</html>

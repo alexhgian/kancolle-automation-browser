@@ -1,69 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World!</title>
-    <style>
-    body {
-        margin: 0;
-    }
+    <title>Kancolle</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 
-    #webcontainer {
-        position: absolute;
-        top: 0px; /* Header Height */
-        bottom: 0px; /* Footer Height */
-        width: 100%;
-    }
-    </style>
 </head>
 <body>
-    <div id="webcontainer">
-    </div>
+    <div id="wrapper">
 
-    <div id=indicator></div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <div id="webcontainer">
+            </div>
+
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
     <!-- <webview src="http://www.adobe.com/software/flash/about/" plugins></webview> -->
 
     <script>
-    var cookieInjected = false;
-    var ipc = require('ipc');
-    ipc.on('apiToken', function(apiurl) {
-        console.log('game.html apiToken: ' + apiurl);
-        var container = document.getElementById("webcontainer");
-        var webview = document.createElement('webview')
-        webview.setAttribute('src', apiurl)
-        webview.setAttribute('plugins', '')
-        container.appendChild(webview);
-        console.log(apiurl);  // Prints "whoooooooh!"
-        webview.addEventListener('dom-ready', function(e) {
-
-            // this.executeJavaScript("alert(document.cookie)");
-            if(!cookieInjected){
-                console.log('injecting cookies')
-                this.executeJavaScript('document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/";');
-                this.executeJavaScript('document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame/";');
-                this.executeJavaScript('document.cookie = "cklg=welcome;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame_s/";');
-                this.executeJavaScript('document.cookie = "ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/";');
-                this.executeJavaScript('document.cookie = "ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame/";');
-                this.executeJavaScript('document.cookie = "ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=.dmm.com;path=/netgame_s/";');
-                cookieInjected = true;
-            }
-        });
-    });
-
-    onload = function() {
-        // console.log('loaded: ' + msg);
-        //
-        // var webview = document.getElementById("foo");
-        // var indicator = document.getElementById("indicator");
-        //
-        // var loadstart = function() {
-        //     indicator.innerText = "loading...";
-        // }
-        // var loadstop = function() {
-        //     indicator.innerText = "";
-        // }
-        // webview.addEventListener("did-start-loading", loadstart);
-        // webview.addEventListener("did-stop-loading", loadstop);
-    }
+    require('./game.js')
     </script>
 </body>
 </html>

@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "main": "main.js",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.3"
+    "electron-packager": "^5.1.0",
+    "electron-prebuilt": "^0.33.3",
+    "electron-rebuild": "^1.0.1"
   },
   "dependencies": {
-    "robotjs": "^0.2.4"
+    "async": "^1.4.2",
+    "robotjs": "^0.3.0"
+  },
+  "scripts": {
+    "packager": "electron-packager ./ robotBrowser --platform=darwin --arch=x64 --version=0.33.3"
   }
 }

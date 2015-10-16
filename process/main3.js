@@ -28,6 +28,7 @@ app.on('window-all-closed', function() {
 });
 
 
+
 // App is ready event
 app.on('ready', function() {
     // Create the browser window.
@@ -42,20 +43,46 @@ app.on('ready', function() {
 
 
     var load = Loader(__dirname, mainWindow);
-    // load.robotTest();
+    load.robotTest();
 
-    fs.readFile('config', 'utf8', function (err, data) {
-        if (err) throw err;
-        if (!data || data.length <= 0){
-            // Redirect to DMM to get API Token
-            mainWindow.loadUrl('file://' + __dirname + '/render/dmm.html');
-            return;
-        }
-        loadGameView(data);
-    });
 
-    // // When the game screen is loaded
-    mainWindow.webContents.on('did-finish-load', sendToGameView);
+    var bounds = mainWindow.getBounds();
+    var pos = robot.getMousePos();
+
+
+    // setInterval(function(){
+    //     bounds = mainWindow.getBounds();
+    //     pos = robot.getMousePos();
+    //
+    //     robot.moveMouse(bounds.x+83, bounds.y+103);
+    //     robot.mouseClick();
+    //
+    //     setTimeout(function(){
+    //         robot.moveMouse(bounds.x+448, bounds.y+103);
+    //         robot.mouseClick();
+    //     },2000)
+    //
+    //
+    //     console.log('offset',{
+    //         x : pos.x-bounds.x,
+    //         y : pos.y-bounds.y
+    //     })
+    //     // console.log('mouse:', pos);
+    //     // console.log('bound', bounds)
+    // }, 4000);
+    //
+    // fs.readFile('config', 'utf8', function (err, data) {
+    //     if (err) throw err;
+    //     if (!data || data.length <= 0){
+    //         // Redirect to DMM to get API Token
+    //         mainWindow.loadUrl('file://' + __dirname + '/render/dmm.html');
+    //         return;
+    //     }
+    //     loadGameView(data);
+    // });
+    //
+    // // // When the game screen is loaded
+    // mainWindow.webContents.on('did-finish-load', sendToGameView);
 });
 
 
