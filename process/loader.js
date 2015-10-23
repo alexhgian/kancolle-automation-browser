@@ -1,17 +1,22 @@
 module.exports = function(dir, mainWindow){
+    var renderPath = '/render/'
     var rootDir = 'file://' + dir;
+
+    function loadUrl(base){
+        mainWindow.loadUrl(rootDir + renderPath + base);
+    }
 
     return {
         robotTest : function(){
-            mainWindow.loadUrl(rootDir + '/render/robot-test.html');
+            loadUrl('robot-test.html');
         },
 
         game : function(){
-            mainWindow.loadUrl(rootDir + '/render/dmm.html');
+            loadUrl('game.html');
         },
 
         dmm : function(){
-            mainWindow.loadUrl(rootDir + '/render/game.html');
+            loadUrl('dmm.html');
         }
     }
 };

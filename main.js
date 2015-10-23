@@ -7,6 +7,7 @@ var robot = require("robotjs");
 
 var Loader = require('./process/loader');
 var Macro = require('./process/macro');
+var RRTray = require('./process/ReRunTray');
 
 var gameUrl = null;
 
@@ -35,13 +36,18 @@ app.on('ready', function() {
         'web-preferences': {
             'plugins': true
         },
-        width: 800, height: 1000, y: 0, fullscreen: false, frame: true
+        width: 900, height: 1000, y: 0, fullscreen: false, frame: true
     });
 
     mainWindow.openDevTools();
-
-
+    
+    // Start Window Loader
     var load = Loader(__dirname, mainWindow);
+
+    // Start the tray
+    var rrTray = RRTray(__dirname, load);
+    rrTray.init();
+
     // load.robotTest();
 
     fs.readFile('config', 'utf8', function (err, data) {

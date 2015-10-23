@@ -2,37 +2,49 @@ var robot = require('robotjs');
 var macro = require('./macro');
 var async = require('async');
 
-module.exports = function(mainWindow){
-    function test(){
-        var bounds = mainWindow.getBounds();
-        var pos = robot.getMousePos();
-        robot.moveMouse(bounds.x+83, bounds.y+103);
-        robot.mouseClick();
-    }
+var bot = {};
+var mainWindow;
 
-
-    function run(macroName){
-        var m = macro[macroName];
-        var cmds = m.commands;
-        var i = 0;
-        async.eachSeries(cmds, function(cmd, callback){
-
-            console.log('Processing Command [',i,']');
-            performAction(cmd, mainWindow, callback);
-            i++;
-        }, function done() {
-            console.log('Done.');
-        });
-
-    }
-
-    return {
-        'test' : test,
-        'run' : run
-    };
+bot.test = function() {
+    var bounds = mainWindow.getBounds();
+    var pos = robot.getMousePos();
+    robot.moveMouse(bounds.x+83, bounds.y+103);
+    robot.mouseClick();
 };
 
 
+bot.run = function(macroName) {
+    var m = macro[macroName];
+    var cmds = m.commands;
+    var i = 0;
+    async.eachSeries(cmds, function(cmd, callback){
+
+        console.log('Processing Command [',i,']');
+        performAction(cmd, mainWindow, callback);
+        i++;
+    }, function done() {
+        console.log('Done.');
+    });
+};
+
+
+var doneLoop = false;
+
+bot.startLoop = function(){
+    doneLoop = false;
+    loop();
+};
+
+bot.endLoop = function(){
+    doneLoop = true;
+};
+
+
+// Expose the module
+module.exports = function(window){
+    mainWindow = window;
+    return bot;
+};
 
 
 /**
@@ -46,7 +58,13 @@ function performAction(cmd, mainWindow, done){
 
     switch(actionName){
         case 'moveMouse':
-        robot.moveMouse(bounds.x+cmd.x, bounds.y+cmd.y);
+        if(cmd.point){
+            var point = cmd.point;
+            robot.moveMouse(bounds.x+point.x, bounds.y+point.y);
+        } else if (cmd.x && cmd.y){
+            robot.moveMouse(bounds.x+cmd.x, bounds.y+cmd.y);
+        }
+
         setTimeout(done, cmd.delay || 0);
         break;
 
@@ -60,3 +78,15 @@ function performAction(cmd, mainWindow, done){
         break;
     }
 }
+
+var loop = function(){
+    var bounds = mainWindow.getBounds();
+    var pos = robot.getMousePos();
+    console.log({
+        x:pos.x-bounds.x,
+        y:pos.y-bounds.y
+    });
+    if(!doneLoop){
+        setTimeout(loop, 1000);
+    }
+};

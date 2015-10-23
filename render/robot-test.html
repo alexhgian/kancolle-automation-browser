@@ -18,8 +18,10 @@
 
     <script>
     window.onload = function(){
-
+        var remote = require('remote');
+        var mainWindow = remote.getCurrentWindow();
         var bot = require('../process/bot')(mainWindow);
+
         bot.run('farmNode');
 
         var lab = document.getElementById('myLabel');

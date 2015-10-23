@@ -1,5 +1,7 @@
 var cookieInjected = false;
 var ipc = require('ipc');
+var remote = require('remote');
+
 ipc.on('apiToken', function(apiurl) {
     console.log('game.html apiToken: ' + apiurl);
     var container = document.getElementById("webcontainer");
@@ -24,13 +26,32 @@ ipc.on('apiToken', function(apiurl) {
     });
 });
 
+
+
 onload = function() {
-    var remote = require('remote');
     var mainWindow = remote.getCurrentWindow();
     var bot = require('../process/bot')(mainWindow);
+
     var farmButton = document.getElementById('farm');
+    var mouseDetect = document.getElementById('mousedetect');
+    var start = document.getElementById('start');
 
     farmButton.addEventListener('click', function(){
         bot.run('farmNode');
+    });
+
+    start.addEventListener('click', function(){
+        bot.run('start');
+    });
+
+    var detectToggle = false;
+    mouseDetect.addEventListener('click', function(){
+        detectToggle = !detectToggle;
+        if(detectToggle){
+            bot.startLoop();
+        } else {
+            bot.endLoop();
+        }
+
     });
 };

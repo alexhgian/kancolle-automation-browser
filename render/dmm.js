@@ -23,7 +23,7 @@ onload = function() {
             console.log('body is ready!');
         }
         // Check if they're at the gamenow
-        if(url === 'http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/') {
+        if(url === 'DMM_GAME_URL') {
             console.log('At Game Screen: ');
         }
 
@@ -56,9 +56,6 @@ onload = function() {
         // console.log(requestMethod)
         // console.log('response...')
         if(apiRE.test(e.newUrl) && !apiTokenFound){
-            console.log('------------------- WIN --------------------');
-            // console.log(e.newUrl);
-            console.log('------------------------------------------');
             apiTokenFound=true;
             // TODO: call main process
             // remote.loadGameView(e.newUrl);
@@ -75,5 +72,9 @@ onload = function() {
             isLoggedIn = true;
         }
     });
+
+
+
+
 
 };
