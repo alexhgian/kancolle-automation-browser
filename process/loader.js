@@ -1,5 +1,5 @@
 module.exports = function(dir, mainWindow){
-    var renderPath = '/render/'
+    var renderPath = '/app/'
     var rootDir = 'file://' + dir;
 
     function loadUrl(base){
@@ -12,11 +12,11 @@ module.exports = function(dir, mainWindow){
         },
 
         game : function(){
-            loadUrl('game.html');
+            loadUrl('game/game.html');
         },
 
         dmm : function(){
-            loadUrl('dmm.html');
+            loadUrl('dmm/dmm.html');
         }
     }
 };

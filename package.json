@@ -1,7 +1,7 @@
 {
   "name": "your-app",
   "version": "0.1.0",
-  "main": "main.js",
+  "main": "./main.js",
   "devDependencies": {
     "electron-packager": "^5.1.0",
     "electron-prebuilt": "^0.33.3",
@@ -12,6 +12,7 @@
     "robotjs": "^0.3.0"
   },
   "scripts": {
+      "start": "electron .",
     "packager": "electron-packager ./ robotBrowser --platform=darwin --arch=x64 --version=0.33.3"
   }
 }

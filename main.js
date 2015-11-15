@@ -11,6 +11,8 @@ var RRTray = require('./process/ReRunTray');
 
 var gameUrl = null;
 
+var gameConfig = require('./config.js');
+
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -36,11 +38,11 @@ app.on('ready', function() {
         'web-preferences': {
             'plugins': true
         },
-        width: 900, height: 1000, y: 0, fullscreen: false, frame: true
+        width: gameConfig.screen.width, height: gameConfig.screen.width, y: 0, fullscreen: false, frame: true
     });
 
     mainWindow.openDevTools();
-    
+
     // Start Window Loader
     var load = Loader(__dirname, mainWindow);
 
@@ -54,7 +56,7 @@ app.on('ready', function() {
         if (err) throw err;
         if (!data || data.length <= 0){
             // Redirect to DMM to get API Token
-            mainWindow.loadUrl('file://' + __dirname + '/render/dmm.html');
+            mainWindow.loadUrl('file://' + __dirname + '/app/dmm/dmm.html');
             return;
         }
         loadGameView(data);
@@ -79,7 +81,7 @@ function loadGameView(data){
     });
 
     gameUrl = data;
-    mainWindow.loadUrl('file://' + __dirname + '/render/game.html');
+    mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
 }
 
 function sendToGameView() {

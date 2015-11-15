@@ -1,3 +1,4 @@
+
 var cookieInjected = false;
 var ipc = require('ipc');
 var remote = require('remote');

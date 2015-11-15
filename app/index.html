@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="rerunApp">
+<head>
+    <title>KCC</title>
+
+    <script src="../bower_components/angular/angular.js"></script>
+
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../assets/css/main.css">
+</head>
+<body>
+    <div ui-view></div>
+
+    <script src="app.js"></script>
+    <script src="app.service.js"></script>
+
+    <script src="game/game.controller.js"></script>
+    <script src="partials/layout.controller.js"></script>
+        <script src="game/game.directive.js"></script>
+</body>
+</html>
